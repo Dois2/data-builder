@@ -1,36 +1,43 @@
 
 interface IArrayStack<T>{
-    items: T[]
+    push(data: T) : void;
+    pop(): T| undefined;
+    peek(): T | undefined;
+    isEmpty(): boolean;
+    clear(): void;
+    size(): number;
 }
 
 export class ArrayStack<T> implements IArrayStack<T>{
-    public items;
+    private _items: Array<T> ;
     
     constructor(){
-        this.items = new Array<T>();
+        this._items = new Array<T>();
     }
 
-    public push(data: T) {
-        this.items.push(data);
+    push(data: T) {
+        this._items.push(data);
     }
 
-    public pop(): T | undefined {
-        return this.items.pop();
+    pop(){
+        return this._items.pop();
     }
 
-    public peek(){
-        return this.items[this.items.length - 1];
+    peek() {
+        if(this.isEmpty()) return undefined;
+        return this._items[this._items.length - 1];
     }
 
-    public isEmpty(): boolean {
-        return this.items.length === 0;
+    isEmpty(){
+        return this._items.length === 0;
     }
 
-    public clear(): void {
-        this.items = new Array<T>();
+    clear(){
+        this._items = new Array<T>();
     }
 
-    public size(): number {
-        return this.items.length;
+    size(){
+        return this._items.length;
     }
+    
 }

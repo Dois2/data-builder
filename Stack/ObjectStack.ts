@@ -1,6 +1,11 @@
 interface IObjectStack<T> {
-    items: IItemsObject<T>;
-    count: number;
+    push(data: T): void;
+    size(): number;
+    isEmpty(): boolean;
+    pop(): T | undefined;
+    peek(): T | undefined;
+    clear(): void;
+    toString(): string;
 }
 
 interface IItemsObject<U> {
@@ -8,50 +13,50 @@ interface IItemsObject<U> {
 }
 
 export class ObjectStack<T> implements IObjectStack<T> {
-    public items;
-    public count;
+    private _items;
+    private _count;
 
     constructor() {
-        this.items = {} as IItemsObject<T>;
-        this.count = 0;
+        this._items = {} as IItemsObject<T>;
+        this._count = 0;
     }
 
-    public push(data: T): void {
-        this.items[this.count] = data;
-        this.count++;
+    push(data: T) {
+        this._items[this._count] = data;
+        this._count++;
     }
 
-    public size() : number {
-        return this.count;
+    size(){
+        return this._count;
     }
 
-    public isEmpty(): boolean{
-        return this.count === 0;
+    isEmpty(){
+        return this._count === 0;
     }
 
-    public pop(): T | undefined {
+    pop(){
         if(this.isEmpty()) return undefined;
-        this.count--;
-        const result = this.items[this.count];
-        delete this.items[this.count];
+        this._count--;
+        const result = this._items[this._count];
+        delete this._items[this._count];
         return result;
     }
 
-    public peek() : T | undefined {
+    peek(){
         if(this.isEmpty()) return undefined;
-        return this.items[this.count -1]
+        return this._items[this._count -1]
     }
 
-    public clear() {
-        this.items = {} as IItemsObject<T>;
-        this.count = 0;
+    clear() {
+        this._items = {} as IItemsObject<T>;
+        this._count = 0;
     }
     
-    public toString():  string{
+    toString(){
         if(this.isEmpty()) return '';
-        let objToString = `${this.items[0]}`
-        for (let i = 1; i < this.count; i++) {
-            objToString = `${objToString},${this.items[i]}`     
+        let objToString = `${this._items[0]}`
+        for (let i = 1; i < this._count; i++) {
+            objToString = `${objToString},${this._items[i]}`     
         }
         return objToString;
 
