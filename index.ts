@@ -1,4 +1,2 @@
-import {ArrayStack} from './Stack/ArrayStack';
-
-
-export { ArrayStack };
+import { ArrayStack, ObjectStack} from './Stack';
+export { ArrayStack, ObjectStack };
