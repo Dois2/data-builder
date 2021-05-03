@@ -13,8 +13,8 @@ interface IItemsObject<U> {
 }
 
 export class ObjectStack<T> implements IObjectStack<T> {
-    private _items;
-    private _count;
+    private _items: IItemsObject<T>;
+    private _count: number;
 
     constructor() {
         this._items = {} as IItemsObject<T>;
